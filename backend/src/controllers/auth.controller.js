@@ -9,14 +9,14 @@ export const signup = async (req, res) => {
   try {
     if (!fullName || !email || !password) {
       return res
-        .status(400)
+        .status(422)
         .json({ message: "Please fill up all input fields." });
     }
 
     // check the length of password
     if (password.length < 6) {
       return res
-        .status(400)
+        .status(422)
         .json({ message: "Password must be at least 6 characters." });
     }
 
@@ -71,7 +71,7 @@ export const login = async (req, res) => {
     // check if the input fields is filled
     if (!email || !password) {
       return res
-        .status(400)
+        .status(422)
         .json({ message: "Please fill up all input fields." });
     }
 
@@ -119,7 +119,7 @@ export const updateProfile = async (req, res) => {
     const userId = req.user._id;
 
     if (!profilePic) {
-      return res.status(400).json({ message: "Profile pic is required." });
+      return res.status(422).json({ message: "Profile pic is required." });
     }
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
