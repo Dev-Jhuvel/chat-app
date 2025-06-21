@@ -35,8 +35,8 @@ const SignUpPage = () => {
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <MessageSquare className="size-6 text-primary" />
+              <div className="size-12 rounded-xl flex items-center justify-center transition-colors">
+                <MessageSquare className="size-12 text-primary hover:text-white" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">
@@ -53,7 +53,7 @@ const SignUpPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
-                  <User className="size-5 text-base-content/40 text-gray-500" />
+                  <User className="size-5 text-base-content opacity-40 " />
                 </div>
                 <input
                   type="text"
@@ -73,7 +73,7 @@ const SignUpPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
-                  <Mail className="size-5 text-base-content/40 text-gray-500" />
+                  <Mail className="size-5 text-base-content opacity-40" />
                 </div>
                 <input
                   type="email"
@@ -93,7 +93,7 @@ const SignUpPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
-                  <Lock className="size-5 text-base-content/40 text-gray-500" />
+                  <Lock className="size-5 text-base-content opacity-40 " />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -110,9 +110,9 @@ const SignUpPage = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="size-5 text-base-component/40" />
+                    <EyeOff className="size-5 text-base-component opacity-40" />
                   ) : (
-                    <Eye className="size-5 text-base-component/40" />
+                    <Eye className="size-5 text-base-component " />
                   )}
                 </button>
               </div>
@@ -135,7 +135,7 @@ const SignUpPage = () => {
           </form>
           {/* Login */}
           <div className="text-center">
-            <p className="text-base-content/60">
+            <p className="text-base-content opacity-60">
               Already have an account? {""}
               <Link to="/login" className="link link-primary">
                 Log in
