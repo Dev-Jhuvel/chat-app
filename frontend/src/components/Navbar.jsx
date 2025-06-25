@@ -9,13 +9,13 @@ const Navbar = () => {
     <header className="bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 backdrop-blur-lg">
       <div className="container mx-auto px-4 h-16">
         <div className="flex items-center justify-between h-full">
-          <div className="flex item-center gap-8 hover:opacity-80">
+          <div className="flex item-center gap-8">
             <Link
               to="/"
               className="flex items-center gap-2.5 transition-all "
             >
               <div className="size-9 rounded-lg flex items-center justify-center">
-                <MessageSquare className="size-8 text-primary hover:text-white"></MessageSquare>
+                <MessageSquare className="size-8 text-primary hover:text-secondary"></MessageSquare>
               </div>
               <h1 className="text-lg font-bold">Chatty</h1>
             </Link>
