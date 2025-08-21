@@ -4,7 +4,7 @@ import { useChatStore } from "../store/useChatStore.js";
 
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
-  const { onlineUsers } = useAuthStore();
+  const { onlineUsers, dynamicProfile } = useAuthStore();
 
   return (
     <div className="p-2.5 border-b border-base-300">
@@ -15,8 +15,7 @@ const ChatHeader = () => {
             <div className="size-10 rounded-full relative">
               <img
                 src={
-                  selectedUser.profilePic ||
-                  `https://api.dicebear.com/6.x/fun-emoji/svg?seed=${selectedUser?.fullName}`
+                  selectedUser.profilePic || dynamicProfile + selectedUser?.fullName
                 }
                 alt={selectedUser.fullName}
               />
@@ -29,11 +28,11 @@ const ChatHeader = () => {
               {onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"}
             </p>
           </div>
-          {/* Close Button */}
-          <button onClick={() => setSelectedUser(null)}>
-            <X />
-          </button>
         </div>
+        {/* Close Button */}
+        <button onClick={() => setSelectedUser(null)}>
+          <X />
+        </button>
       </div>
     </div>
   );
