@@ -8,19 +8,21 @@ import logo from "../assets/logo.svg";
 
 const Navbar = () => {
   const { logout, authUser, isLoggingOut } = useAuthStore();
-  const { users, notifyForMessage } = useChatStore();
+  const { users, selectedUser, notifyForMessage } = useChatStore();
 
   useEffect(() => {
     const socket = useAuthStore.getState().socket;
     if (socket) {
       socket.on("newMessage", (newMessage) => {
-        notifyForMessage(newMessage);
+        if (selectedUser._id !== newMessage.senderId) {
+          notifyForMessage(newMessage);
+          return () => {
+            socket.off("newMessage");
+          };
+        }
       });
-      return () => {
-        socket.off("newMessage");
-      };
     }
-  }, [users, notifyForMessage]);
+  }, [users, notifyForMessage, selectedUser]);
 
   return (
     <header className="bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 backdrop-blur-lg">
