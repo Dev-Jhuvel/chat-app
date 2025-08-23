@@ -14,7 +14,7 @@ const Navbar = () => {
     const socket = useAuthStore.getState().socket;
     if (socket) {
       socket.on("newMessage", (newMessage) => {
-        if (selectedUser._id !== newMessage.senderId) {
+        if (!selectedUser ||selectedUser._id !== newMessage.senderId) {
           notifyForMessage(newMessage);
           return () => {
             socket.off("newMessage");
