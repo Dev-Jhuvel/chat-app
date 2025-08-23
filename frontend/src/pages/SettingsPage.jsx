@@ -1,6 +1,8 @@
 import { useThemeStore } from "../store/useThemeStore.js";
 import THEMES from "../constants";
 import { Send } from "lucide-react";
+import { useState } from "react";
+import logo from "../assets/react.svg";
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
   {
@@ -9,13 +11,74 @@ const PREVIEW_MESSAGES = [
     isSent: true,
   },
 ];
-
+const notifyUser = async (
+  notificationText = "Thanks for Turning on the notification!"
+) => {
+  if (!("Notification" in window)) {
+    alert("Browser does not support notification");
+  } else if (Notification.permission === "granted") {
+    new Notification(notificationText, {
+      body: notificationText,
+      icon: logo,
+      badge: logo,
+      image: logo,
+      renotify: true,
+    });
+  } else if (Notification.permission !== "granted") {
+    await Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification(notificationText, {
+          body: notificationText,
+          icon: logo,
+          badge: logo,
+          image: logo,
+          renotify: true,
+        });
+      }
+    });
+  }
+};
 const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
+  const [notificationState, setNotificationState] = useState(
+    Notification.permission === "granted" ? true : false
+  );
+  const enableNotification = async () => {
+    await notifyUser();
+    if (Notification.permission === "granted") setNotificationState(true);
+  };
+  const disableNotification = async () => {
+    await notifyUser(
+      "To remove the notification, set the notification to default in the website permission"
+    );
+  };
 
   return (
     <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-lg font-semibold">Notifications</h2>
+            <p className="text-sm text-base-content/70">
+              Use Browser Notification
+            </p>
+          </div>
+          {notificationState ? (
+            <button
+              onClick={disableNotification}
+              className="btn btn-secondary text-black h-10 min-h-0"
+            >
+              Thanks for turning notification on!
+            </button>
+          ) : (
+            <button
+              onClick={enableNotification}
+              className="btn btn-primary h-10 min-h-0"
+            >
+              Turn on
+            </button>
+          )}
+        </div>
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
           <p className="text-sm text-base-content/70">

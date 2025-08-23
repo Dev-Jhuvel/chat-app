@@ -87,7 +87,7 @@ const MessageInput = () => {
           />
           <button
             type="button"
-            className={`hidden sm:flex btn btn-circle ${
+            className={`hidden sm:flex  btn btn-circle ${
               imagePreview ? "text-emerald-500" : "text-zinc-400"
             } `}
             onClick={() => {
@@ -100,7 +100,7 @@ const MessageInput = () => {
 
         <button
           type="button"
-          className="btn btn-sm btn-circle"
+          className="btn btn-primary h-10 min-h-0"
           onClick={handleSendMessage}
           disabled={!text.trim() && !imagePreview}
         >

@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { useAuthStore } from "./useAuthStore.js";
+import logo from "../assets/logo.svg";
 
 export const useChatStore = create((set, get) => ({
   messages: [],
@@ -50,16 +51,44 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
+  notifyForMessage: async (newMessage) => {
+    const { users } = get();
+    users.forEach((user) => {
+      if (user._id === newMessage.senderId) {
+        const notifText = `${user.fullName}: ${newMessage.text}`;
+        if (Notification.permission === "granted") {
+          new Notification(`New Message From ${user.fullName}`, {
+            body: notifText,
+            icon: logo,
+            badge: logo,
+            image: logo,
+            tag: newMessage._id,
+            renotify: true,
+            requireInteraction: true,
+          });
+        } else {
+          toast(notifText, {
+            duration: 4000,
+            position: "top-right",
+            icon: "💌",
+          });
+        }
+      }
+    });
+  },
+
   subscribeToMessages: () => {
     const { selectedUser } = get();
     if (!selectedUser) return;
-
     const socket = useAuthStore.getState().socket;
     socket.on("newMessage", (newMessage) => {
       const isMessageSentFromSelectedUser =
         newMessage.senderId === selectedUser._id;
-      if (isMessageSentFromSelectedUser)
+      if (isMessageSentFromSelectedUser) {
         set({ messages: [...get().messages, newMessage] });
+      } else {
+        get().notifyForMessage(newMessage);
+      }
     });
   },
 
