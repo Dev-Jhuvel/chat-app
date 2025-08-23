@@ -14,14 +14,17 @@ const Navbar = () => {
     const socket = useAuthStore.getState().socket;
     if (socket) {
       socket.on("newMessage", (newMessage) => {
-        if (!selectedUser ||selectedUser._id !== newMessage.senderId) {
+        const isNotFromSelectedUser = selectedUser
+          ? newMessage.senderId !== selectedUser._id
+          : false;
+        if (!selectedUser || isNotFromSelectedUser) {
           notifyForMessage(newMessage);
-          return () => {
-            socket.off("newMessage");
-          };
         }
       });
     }
+    return () => {
+      socket.off("newMessage");
+    };
   }, [users, notifyForMessage, selectedUser]);
 
   return (
