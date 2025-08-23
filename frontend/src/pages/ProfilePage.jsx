@@ -7,7 +7,6 @@ const ProfilePage = () => {
   // TODO: CANT UPLOAD IMAGE
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     if(!file) return;
 
