@@ -21,9 +21,8 @@ const notifyUser = async (
       body: notificationText,
       icon: logo,
       badge: logo,
-      image: logo,
       renotify: true,
-      tag: "update-alert"
+      tag: "settings-notification",
     });
   } else if (Notification.permission !== "granted") {
     await Notification.requestPermission().then((permission) => {
@@ -32,9 +31,8 @@ const notifyUser = async (
           body: notificationText,
           icon: logo,
           badge: logo,
-          image: logo,
           renotify: true,
-          tag: "update-alert"
+          tag: "settings-notification",
         });
       }
     });

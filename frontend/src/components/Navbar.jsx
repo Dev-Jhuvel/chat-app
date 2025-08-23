@@ -21,10 +21,10 @@ const Navbar = () => {
           notifyForMessage(newMessage);
         }
       });
+      return () => {
+        socket.off("newMessage");
+      };
     }
-    return () => {
-      socket.off("newMessage");
-    };
   }, [users, notifyForMessage, selectedUser]);
 
   return (
