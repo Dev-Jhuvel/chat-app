@@ -11,46 +11,46 @@ const PREVIEW_MESSAGES = [
     isSent: true,
   },
 ];
-// const notifyUser = async (
-//   notificationText = "Thanks for Turning on the notification!"
-// ) => {
-//   if (!("Notification" in window)) {
-//     alert("Browser does not support notification");
-//   } else if (Notification.permission === "granted") {
-//     new Notification(notificationText, {
-//       body: notificationText,
-//       icon: logo,
-//       badge: logo,
-//       image: logo,
-//       renotify: true,
-//     });
-//   } else if (Notification.permission !== "granted") {
-//     await Notification.requestPermission().then((permission) => {
-//       if (permission === "granted") {
-//         new Notification(notificationText, {
-//           body: notificationText,
-//           icon: logo,
-//           badge: logo,
-//           image: logo,
-//           renotify: true,
-//         });
-//       }
-//     });
-//   }
-// };
+const notifyUser = async (
+  notificationText = "Thanks for Turning on the notification!"
+) => {
+  if (!("Notification" in window)) {
+    alert("Browser does not support notification");
+  } else if (Notification.permission === "granted") {
+    new Notification(notificationText, {
+      body: notificationText,
+      icon: logo,
+      badge: logo,
+      image: logo,
+      renotify: true,
+    });
+  } else if (Notification.permission !== "granted") {
+    await Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification(notificationText, {
+          body: notificationText,
+          icon: logo,
+          badge: logo,
+          image: logo,
+          renotify: true,
+        });
+      }
+    });
+  }
+};
 const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
   const [notificationState, setNotificationState] = useState(
     Notification.permission === "granted" ? true : false
   );
   const enableNotification = async () => {
-    // await notifyUser();
-    // if (Notification.permission === "granted") setNotificationState(true);
+    await notifyUser();
+    if (Notification.permission === "granted") setNotificationState(true);
   };
   const disableNotification = async () => {
-    // await notifyUser(
-    //   "To remove the notification, set the notification to default in the website permission"
-    // );
+    await notifyUser(
+      "To remove the notification, set the notification to default in the website permission"
+    );
   };
 
   return (

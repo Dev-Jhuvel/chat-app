@@ -12,12 +12,14 @@ const Navbar = () => {
 
   useEffect(() => {
     const socket = useAuthStore.getState().socket;
-    socket.on("newMessage", (newMessage) => {
-      notifyForMessage(newMessage);
-    });
-    return () => {
-      socket.off("newMessage");
-    };
+    if (socket) {
+      socket.on("newMessage", (newMessage) => {
+        notifyForMessage(newMessage);
+      });
+      return () => {
+        socket.off("newMessage");
+      };
+    }
   }, [users, notifyForMessage]);
 
   return (
