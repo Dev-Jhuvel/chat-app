@@ -15,7 +15,7 @@ const PREVIEW_MESSAGES = [
 const notifyUser = async (
   notificationText = "Thanks for Turning on the notification!"
 ) => {
-  if (!("Notification" in window)) {
+  if (!("Notification" in window) && !("serviceWorker" in navigator)) {
     toast.error("Browser does not support notification");
   } else if ("serviceWorker" in navigator && "Notification" in window) {
     await navigator.serviceWorker.register("/sw.js").then((reg) => {
@@ -33,11 +33,19 @@ const notifyUser = async (
 const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
   const [notificationState, setNotificationState] = useState(
-    Notification.permission === "granted" ? true : false
+    "Notification" in window && "serviceWorker" in navigator
+      ? Notification.permission === "granted"
+        ? true
+        : false
+      : false
   );
   const enableNotification = async () => {
     await notifyUser();
-    if (Notification.permission === "granted") setNotificationState(true);
+    "Notification" in window && "serviceWorker" in navigator
+      ? Notification.permission === "granted"
+        ? setNotificationState(true)
+        : false
+      : "";
   };
   const disableNotification = async () => {
     await notifyUser(
