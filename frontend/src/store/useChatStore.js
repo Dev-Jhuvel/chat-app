@@ -69,13 +69,22 @@ export const useChatStore = create((set, get) => ({
           options.image = newMessage.image;
           options.body = `${user.fullName} sent an image`;
         }
-        if (Notification.permission === "granted") {
-          new Notification(`New Message From ${user.fullName}`, options);
-        } else {
-          toast(notifText, {
-            duration: 4000,
-            position: "top-right",
-            icon: "💌",
+        if ("serviceWorker" in navigator && "Notification" in window) {
+          navigator.serviceWorker.register("/sw.js").then((reg) => {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                reg.showNotification(
+                  `New Message From ${user.fullName}`,
+                  options
+                );
+              } else {
+                toast(notifText, {
+                  duration: 4000,
+                  position: "top-right",
+                  icon: "💌",
+                });
+              }
+            });
           });
         }
       }

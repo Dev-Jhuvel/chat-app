@@ -2,6 +2,7 @@ import { useThemeStore } from "../store/useThemeStore.js";
 import THEMES from "../constants";
 import { Send } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import logo from "../assets/react.svg";
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
@@ -11,30 +12,22 @@ const PREVIEW_MESSAGES = [
     isSent: true,
   },
 ];
+let options = {};
 const notifyUser = async (
   notificationText = "Thanks for Turning on the notification!"
 ) => {
   if (!("Notification" in window)) {
-    alert("Browser does not support notification");
-  } else if (Notification.permission === "granted") {
-    new Notification(notificationText, {
-      body: notificationText,
-      icon: logo,
-      badge: logo,
-      renotify: true,
-      tag: "settings-notification",
-    });
-  } else if (Notification.permission !== "granted") {
-    await Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        new Notification(notificationText, {
-          body: notificationText,
-          icon: logo,
-          badge: logo,
-          renotify: true,
-          tag: "settings-notification",
-        });
-      }
+    toast.error("Browser does not support notification");
+  } else if ("serviceWorker" in navigator && "Notification" in window) {
+    await navigator.serviceWorker.register("/sw.js").then((reg) => {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          reg.showNotification(notificationText, {
+            body: "Test",
+            icon: logo,
+          });
+        }
+      });
     });
   }
 };
