@@ -23,6 +23,7 @@ const notifyUser = async (
       badge: logo,
       image: logo,
       renotify: true,
+      tag: "update-alert"
     });
   } else if (Notification.permission !== "granted") {
     await Notification.requestPermission().then((permission) => {
@@ -33,6 +34,7 @@ const notifyUser = async (
           badge: logo,
           image: logo,
           renotify: true,
+          tag: "update-alert"
         });
       }
     });
