@@ -56,16 +56,21 @@ export const useChatStore = create((set, get) => ({
     users.forEach((user) => {
       if (user._id === newMessage.senderId) {
         const notifText = `${user.fullName}: ${newMessage.text}`;
+        const options = {
+          body: notifText,
+          icon: logo,
+          badge: logo,
+          image: newMessage,
+          tag: newMessage._id,
+          renotify: true,
+          requireInteraction: true,
+        };
+        if (newMessage.image) {
+          options.image = newMessage.image;
+          options.body = `${user.fullName} sent an image`;
+        }
         if (Notification.permission === "granted") {
-          new Notification(`New Message From ${user.fullName}`, {
-            body: notifText,
-            icon: logo,
-            badge: logo,
-            image: logo,
-            tag: newMessage._id,
-            renotify: true,
-            requireInteraction: true,
-          });
+          new Notification(`New Message From ${user.fullName}`, options);
         } else {
           toast(notifText, {
             duration: 4000,
