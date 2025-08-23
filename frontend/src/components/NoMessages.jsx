@@ -28,8 +28,8 @@ const NoMessages = () => {
         </div>
       </div>
       {/* Welcome Text */}
-      <h2 className="text-2xl font-bold"> {selectedUser.fullName} </h2>
-      <p className="text-base-content/60">
+      <h2 className="text-md md:text-2xl font-bold"> {selectedUser.fullName} </h2>
+      <p className="text-sm md:text-md text-center text-base-content/60">
         Send a message and start a conversation.
       </p>
     </div>

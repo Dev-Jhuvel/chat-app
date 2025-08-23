@@ -4,11 +4,17 @@ import { useAuthStore } from "../store/useAuthStore.js";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton.jsx";
 
 import { User } from "lucide-react";
+import toast from "react-hot-toast";
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore();
   const { onlineUsers, authUser } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
+
+  useEffect(() => {
+    if (showOnlineOnly) toast.success("Showing Online Users Only");
+    else toast.success("Showing All Users");
+  }, [showOnlineOnly]);
 
   useEffect(() => {
     getUsers();
@@ -22,8 +28,11 @@ const Sidebar = () => {
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
       <div className="border-b border-base-300 w-full p-5">
-        <div className="flex flex-items-center gap-2">
-          <User className="size-6" />
+        <div className="flex justify-center sm:justify-normal items-center gap-2 p-2 rounded-full border-primary ring sm:ring-0">
+          <User
+            className={`size-6 ${showOnlineOnly ? "text-green-500 sm:text-base-content" : ""}`}
+            onClick={() => setShowOnlineOnly(!showOnlineOnly)}
+          />
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
         {/* Online filter toggle */}

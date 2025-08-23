@@ -66,9 +66,9 @@ const SettingsPage = () => {
           {notificationState ? (
             <button
               onClick={disableNotification}
-              className="btn btn-secondary text-black h-10 min-h-0"
+              className="btn-sm sm:btn-md btn btn-secondary text-black h-10 min-h-0"
             >
-              Thanks for turning notification on!
+              Try Notification!
             </button>
           ) : (
             <button
