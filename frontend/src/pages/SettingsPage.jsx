@@ -3,7 +3,7 @@ import THEMES from "../constants";
 import { Send } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import logo from "../assets/react.svg";
+import logo from "../assets/logo.svg";
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
   {
@@ -12,7 +12,6 @@ const PREVIEW_MESSAGES = [
     isSent: true,
   },
 ];
-let options = {};
 const notifyUser = async (
   notificationText = "Thanks for Turning on the notification!"
 ) => {
@@ -23,7 +22,7 @@ const notifyUser = async (
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
           reg.showNotification(notificationText, {
-            body: "Test",
+            body: "Chatty Notification",
             icon: logo,
           });
         }
