@@ -73,6 +73,9 @@ const ChatContainer = () => {
               {message.image && (
                 <img
                   src={message.image}
+                  onLoad={() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }}
                   alt="Attachment"
                   className="sm:max-w-[200px] rounded-md mb-2"
                 />
