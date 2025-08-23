@@ -77,14 +77,14 @@ export const useChatStore = create((set, get) => ({
                   `New Message From ${user.fullName}`,
                   options
                 );
-              } else {
-                toast(notifText, {
-                  duration: 4000,
-                  position: "top-right",
-                  icon: "💌",
-                });
               }
             });
+          });
+        } else {
+          toast(notifText, {
+            duration: 4000,
+            position: "top-right",
+            icon: "💌",
           });
         }
       }
