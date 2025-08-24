@@ -3,8 +3,6 @@ import { useAuthStore } from "../store/useAuthStore.js";
 import { useChatStore } from "../store/useChatStore.js";
 import { MessageSquare, User, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
-import logo from "../assets/logo.svg";
 
 const Navbar = () => {
   const { logout, authUser, isLoggingOut } = useAuthStore();
