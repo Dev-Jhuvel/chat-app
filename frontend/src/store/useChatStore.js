@@ -80,7 +80,7 @@ export const useChatStore = create((set, get) => ({
               }
             });
           });
-        } else {
+        } else if (!("Notification" in window)) {
           toast(notifText, {
             duration: 4000,
             position: "top-right",

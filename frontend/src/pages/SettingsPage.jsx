@@ -15,7 +15,7 @@ const PREVIEW_MESSAGES = [
 const notifyUser = async (
   notificationText = "Thanks for Turning on the notification!"
 ) => {
-  if (!("Notification" in window) && !("serviceWorker" in navigator)) {
+  if (!("Notification" in window) || !("serviceWorker" in navigator)) {
     toast.error("Browser does not support notification");
   } else if ("serviceWorker" in navigator && "Notification" in window) {
     await navigator.serviceWorker.register("/sw.js").then((reg) => {
