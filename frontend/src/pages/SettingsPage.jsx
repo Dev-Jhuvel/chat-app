@@ -1,4 +1,5 @@
 import { useThemeStore } from "../store/useThemeStore.js";
+import { useChatStore } from "../store/useChatStore.js";
 import THEMES from "../constants";
 import { Send } from "lucide-react";
 import { useState } from "react";
@@ -31,6 +32,7 @@ const notifyUser = async (
   }
 };
 const SettingsPage = () => {
+  const { unlockAudio } = useChatStore();
   const { theme, setTheme } = useThemeStore();
   const [notificationState, setNotificationState] = useState(
     "Notification" in window && "serviceWorker" in navigator
@@ -78,6 +80,18 @@ const SettingsPage = () => {
               Turn on
             </button>
           )}
+        </div>
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-lg font-semibold">Sounds</h2>
+            <p className="text-sm text-base-content/70">Use Browser Sound</p>
+          </div>
+          <button
+            onClick={unlockAudio}
+            className="btn-sm sm:btn-md btn btn-primary text-black h-10 min-h-0"
+          >
+            Try Sounds!
+          </button>
         </div>
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>

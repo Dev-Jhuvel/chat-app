@@ -87,7 +87,7 @@ const MessageInput = () => {
           />
           <button
             type="button"
-            className={`sm:flex btn-circle btn-sm md:btn-md btn  ${
+            className={`sm:flex btn-circle btn-sm sm:btn-md btn  ${
               imagePreview ? "text-emerald-500" : "text-zinc-400"
             } `}
             onClick={() => {
