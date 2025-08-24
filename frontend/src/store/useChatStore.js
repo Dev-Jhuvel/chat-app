@@ -102,7 +102,7 @@ export const useChatStore = create((set, get) => {
                   );
                 } else {
                   get().unlockAudio();
-                  toast(notifText, {
+                  return toast(notifText, {
                     duration: 4000,
                     position: "top-right",
                     icon: "💌",
@@ -112,7 +112,7 @@ export const useChatStore = create((set, get) => {
             });
           } else if (!("Notification" in window)) {
             get().unlockAudio();
-            toast(notifText, {
+            return toast(notifText, {
               duration: 4000,
               position: "top-right",
               icon: "💌",
