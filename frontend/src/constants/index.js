@@ -1,36 +1,48 @@
 const THEMES = [
+  // 🧵 Soft & Minimal
+  "wireframe",
+  "lofi",
+
+  // 🌞 Bright & Cheerful (lightest first)
   "light",
-  "dark",
   "cupcake",
-  "bumblebee",
-  "emerald",
-  "corporate",
-  "synthwave",
-  "retro",
-  "cyberpunk",
+  "lemonade",
+  "pastel",
   "valentine",
-  "halloween",
+  "aqua",
+  "bumblebee",
+
+  // 🧚 Fantasy & Whimsical
+  "fantasy",
+  "sunset",
+  "retro",
+  "winter",
+
+  // 🌿 Natural & Earthy
   "garden",
   "forest",
-  "aqua",
-  "lofi",
-  "pastel",
-  "fantasy",
-  "wireframe",
-  "black",
-  "luxury",
-  "dracula",
-  "cmyk",
   "autumn",
-  "business",
-  "acid",
-  "lemonade",
-  "night",
   "coffee",
-  "winter",
-  "dim",
+  "business",
+
+  // 🧊 Cool & Professional
+  "corporate",
+  "emerald",
   "nord",
-  "sunset",
+
+  // 🌙 Dark & Moody
+  "dim",
+  "night",
+  "dark",
+  "black",
+  "dracula",
+  "luxury",
+
+  // 🧪 Futuristic & Neon (strongest contrast)
+  "cmyk",
+  "acid",
+  "synthwave",
+  "cyberpunk"
 ];
 
 export default THEMES;
