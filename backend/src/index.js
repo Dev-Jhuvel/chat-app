@@ -7,6 +7,7 @@ import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
+import job from '../src/lib/cron.js';
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -33,6 +34,10 @@ if (process.env.NODE_ENV === "production") {
   app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
+  job.start;
+  app.use("/api/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 }
 server.listen(PORT, () => {
   console.log(
